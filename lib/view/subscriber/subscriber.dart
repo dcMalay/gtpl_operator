@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gtpl_operator/const/const.dart';
-import 'package:gtpl_operator/view/subscriber/subscreen/cable_tv.dart';
+import 'package:gtpl_operator/view/subscriber/subscreen/broadband/broadband.dart';
+import 'package:gtpl_operator/view/subscriber/subscreen/cable/cable_tv.dart';
 
 class Subscriber extends StatelessWidget {
   const Subscriber({super.key});
@@ -9,51 +10,27 @@ class Subscriber extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: primaryColor,
-          ),
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                "QuickPay",
-                style: TextStyle(
-                  color: primaryColor,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            Center(
-                child: Text(
-              "Enter your details to recharge",
-              style: TextStyle(color: greyColor),
-            )),
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 1,
-                        spreadRadius: 2,
-                        color: primaryColor.withOpacity(0.1))
-                  ],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                ),
-                child: TabBar(
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 1,
+                          spreadRadius: 2,
+                          color: primaryColor.withOpacity(0.1))
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                  ),
+                  child: TabBar(
                     labelColor: Colors.white,
                     unselectedLabelColor: primaryColor,
                     indicator: BoxDecoration(
@@ -87,15 +64,20 @@ class Subscriber extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ]),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            const Expanded(
-              child: TabBarView(children: [
-                CableTv(),
-              ]),
-            ),
-          ],
+              const Expanded(
+                child: TabBarView(
+                  children: [
+                    CableTv(),
+                    BroadBand(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
