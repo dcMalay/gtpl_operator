@@ -3,6 +3,7 @@ import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/home/home_screen.dart';
 import 'package:gtpl_operator/view/myaccount/myaccount.dart';
+import 'package:gtpl_operator/view/subscriber/subscreen/cable/components/subscreen/demo_ticket.dart';
 import 'package:gtpl_operator/view/subscriber/subscriber.dart';
 
 class Home extends StatefulWidget {
@@ -17,10 +18,11 @@ class _HomeState extends State<Home> {
 
   List<Widget> currentWidget = [
     const HomeScreen(),
-    const Text(
-      'help',
-      style: TextStyle(color: Colors.black),
-    ),
+    const Search(),
+    // const Text(
+    //   'help',
+    //   style: TextStyle(color: Colors.black),
+    // ),
     const Subscriber(),
     const MyAccount()
   ];

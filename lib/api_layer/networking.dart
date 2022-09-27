@@ -60,3 +60,20 @@ Future<List<GetTicket>> fetchUserTicket(String user) async {
     throw Exception('Unexpected error occured!');
   }
 }
+
+class SearchApi {
+  static Future<List<GetTicket>> getTickets(String query) async {
+    final url = Uri.parse("http://3.111.229.113:3000/ticket/ze_alam");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final List tickets = json.decode(response.body);
+      return tickets.map((e) => GetTicket.fromJson(e)).where((ticket) {
+        final userId = ticket.userId;
+        final searchquery = query;
+        return userId.contains(searchquery);
+      }).toList();
+    } else {
+      throw Exception();
+    }
+  }
+}
