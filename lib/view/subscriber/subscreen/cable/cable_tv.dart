@@ -140,30 +140,10 @@ class _CableTvState extends State<CableTv> {
             ],
           ),
         ),
-        const OperatorTicketView(
-          issueTitle: 'service issue',
-          status: 'active',
-        ),
-        const OperatorTicketView(
-          issueTitle: 'service issue',
-          status: 'inactive',
-        ),
-        const OperatorTicketView(
-          issueTitle: 'service issue',
-          status: 'active',
-        ),
-        // const OperatorTicketView(
-        //   issueTitle: 'service issue',
-        //   status: 'inactive',
-        // ),
-        // const OperatorTicketView(
-        //   issueTitle: 'service issue',
-        //   status: 'active',
-        // ),
-        // const OperatorTicketView(
-        //   issueTitle: 'service issue',
-        //   status: 'inactive',
-        // ),
+        Container(
+            padding: const EdgeInsets.only(top: 10),
+            height: 480,
+            child: const OperatorTicketView()),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
           child: Column(
@@ -240,8 +220,9 @@ class _CableTvState extends State<CableTv> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return const SubscriberDetails(
-                          subscriberName: 'Priya',
-                          subscriberLocation: 'subscriberLocation');
+                        subscriberName: 'Priya',
+                        subscriberLocation: 'subscriberLocation',
+                      );
                     }));
                   },
                 ),

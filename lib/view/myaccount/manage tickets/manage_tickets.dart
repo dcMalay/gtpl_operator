@@ -11,7 +11,9 @@ class ManageTicket extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           leading: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
@@ -35,7 +37,10 @@ class ManageTicket extends StatelessWidget {
               style: TextStyle(fontSize: 20),
             ),
           ),
-          SizedBox(height: 4000, child: Ticket()),
+          SizedBox(
+            height: 1650,
+            child: Ticket(),
+          ),
         ],
       ),
     );

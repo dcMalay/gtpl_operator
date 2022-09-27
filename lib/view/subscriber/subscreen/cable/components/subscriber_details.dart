@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/subscriber/subscreen/broadband/broadband.dart';
-import 'package:gtpl_operator/view/subscriber/subscreen/cable/cable_tv.dart';
 import 'package:gtpl_operator/view/subscriber/subscreen/cable/components/subscreen/cable_screen.dart';
 
 class SubscriberDetails extends StatelessWidget {
