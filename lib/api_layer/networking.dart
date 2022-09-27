@@ -41,3 +41,22 @@ Future<List<GetTicket>> fetchTicketData() async {
     throw Exception('Unexpected error occured!');
   }
 }
+
+//get a particular user ticket
+Future<List<GetTicket>> fetchUserTicket(String user) async {
+  var authToken = await _secureStorage.read(key: 'token');
+  // print("operator from fetchTicketData---->${opreator}");
+  final response = await http.get(
+    Uri.parse('${baseUrl}ticket/$user'),
+    headers: {
+      HttpHeaders.authorizationHeader: authToken!,
+      HttpHeaders.contentTypeHeader: 'application/json'
+    },
+  );
+  if (response.statusCode == 200) {
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => GetTicket.fromJson(data)).toList();
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
+}

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/subscriber/subscreen/cable/components/operatorticketview.dart';
 import 'package:gtpl_operator/view/subscriber/subscreen/cable/components/subscriber_details.dart';
@@ -13,6 +16,7 @@ class CableTv extends StatefulWidget {
 
 class _CableTvState extends State<CableTv> {
   final List<bool> _selectedStatus = <bool>[true, false, false];
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +45,20 @@ class _CableTvState extends State<CableTv> {
           ],
         ),
         const SizedBox(height: 30),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 15.0),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: TextField(
+            controller: _searchController,
             decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              // suffixIcon: IconButton(
-              //   icon: const Icon(Icons.clear),
-              //   onPressed: () {
-              //     /* Clear the search field */
-              //   },
-              // ),
-              hintText: 'Search by Name/Id',
-              border: OutlineInputBorder(),
+              // prefixIcon: const Icon(Icons.search),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () {
+                  fetchUserTicket(_searchController.text);
+                },
+              ),
+              hintText: 'Search by Id',
+              border: const OutlineInputBorder(),
             ),
           ),
         ),
@@ -140,10 +145,18 @@ class _CableTvState extends State<CableTv> {
             ],
           ),
         ),
+        // Column(
+        //   children: const [
+        //     Expanded(
+        //       child: OperatorTicketView(),
+        //     )
+        //   ],
+        // ),
         Container(
-            padding: const EdgeInsets.only(top: 10),
-            height: 480,
-            child: const OperatorTicketView()),
+          padding: const EdgeInsets.only(top: 10),
+          height: 480,
+          child: const OperatorTicketView(),
+        ),
         Padding(
           padding: const EdgeInsets.only(left: 20.0, top: 20.0, right: 20.0),
           child: Column(

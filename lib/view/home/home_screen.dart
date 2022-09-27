@@ -4,6 +4,7 @@ import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/home/components/reminder.dart';
 import 'package:gtpl_operator/view/home/components/slider.dart';
 import 'package:gtpl_operator/view/home/components/ticket.dart';
+import 'package:gtpl_operator/view/myaccount/manage%20tickets/manage_tickets.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({
@@ -163,7 +164,27 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            transitionDuration:
+                                const Duration(milliseconds: 500),
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const ManageTicket(),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: Tween<Offset>(
+                                        begin: const Offset(1, 0),
+                                        end: Offset.zero)
+                                    .animate(animation),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      },
                       child: Container(
                         margin: const EdgeInsets.only(right: 15),
                         decoration: BoxDecoration(

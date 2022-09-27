@@ -17,10 +17,18 @@ class _TicketState extends State<Ticket> {
   String dropdownvalue = '';
   final List<String> _items = ['pending', 'in-progress'];
   late Future<List<GetTicket>> futureData;
+  Iterable<GetTicket> searchResult = [];
+
+  List<GetTicket> ticketDetails = [];
 
   @override
   void initState() {
     futureData = fetchTicketData();
+    // fetchTicketData().then((data) {
+    //   setState(() {
+    //     ticketDetails = searchResult = data;
+    //   });
+    // });
     super.initState();
   }
 
@@ -38,6 +46,7 @@ class _TicketState extends State<Ticket> {
                   var str = data[index].createdAt.toString();
                   var parts = str.split(' ');
                   var createdDate = parts[0].trim();
+
                   return Container(
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.symmetric(
@@ -187,18 +196,6 @@ class _TicketState extends State<Ticket> {
                                             child: ListView(
                                               children: [
                                                 Text(data[index].description),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
-                                                //   Text(
-                                                //       'customer detaissdfjklebrfjfebfljbhrjhbfkjrhebfuqkbgfliqregfqueirgfbkquerfkuqerbhfkueybfkurhjebrmndcbladfjlibroluqreolughqiurgeqruefjhbfrhefuefjsbckjgafileglige;igGFBIYWEUOCTGOUYTGOUCBTORUOOUouebgogcnogruygfukejkdfkahrflureilgkksbclkiuegiortoufhvfurehewfuklfjewhkuekjugaeswghfkasghfuksgfruetgfruefguergfkue'),
                                               ],
                                             ),
                                           ),
@@ -239,8 +236,9 @@ class _TicketState extends State<Ticket> {
                                               child: Text(
                                                 'Request Admin',
                                                 style: TextStyle(
-                                                    color: whiteColor,
-                                                    fontSize: 16),
+                                                  color: whiteColor,
+                                                  fontSize: 16,
+                                                ),
                                               ),
                                             ),
                                           ],
