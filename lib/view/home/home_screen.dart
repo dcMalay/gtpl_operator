@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/home/components/reminder.dart';
 import 'package:gtpl_operator/view/home/components/slider.dart';
@@ -14,6 +15,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    getToken();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,8 +153,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                const Ticket(issueTitle: 'Service Issue'),
-                const Ticket(issueTitle: 'Gateway Issue'),
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  height: 400,
+                  width: 450,
+                  child: const Ticket(),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [

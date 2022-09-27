@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
 import 'package:gtpl_operator/view/home/home_screen.dart';
 import 'package:gtpl_operator/view/myaccount/myaccount.dart';
@@ -23,6 +24,12 @@ class _HomeState extends State<Home> {
     const Subscriber(),
     const MyAccount()
   ];
+
+  @override
+  void initState() {
+    getToken();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
