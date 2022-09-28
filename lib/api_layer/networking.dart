@@ -36,7 +36,9 @@ Future<List<GetTicket>> fetchTicketData() async {
   );
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
-    return jsonResponse.map((data) => GetTicket.fromJson(data)).toList();
+    final allTicketList =
+        jsonResponse.map((data) => GetTicket.fromJson(data)).toList();
+    return allTicketList;
   } else {
     throw Exception('Unexpected error occured!');
   }
@@ -61,19 +63,44 @@ Future<List<GetTicket>> fetchUserTicket(String user) async {
   }
 }
 
-class SearchApi {
-  static Future<List<GetTicket>> getTickets(String query) async {
-    final url = Uri.parse("http://3.111.229.113:3000/ticket/ze_alam");
-    final response = await http.get(url);
-    if (response.statusCode == 200) {
-      final List tickets = json.decode(response.body);
-      return tickets.map((e) => GetTicket.fromJson(e)).where((ticket) {
-        final userId = ticket.userId;
-        final searchquery = query;
-        return userId.contains(searchquery);
-      }).toList();
-    } else {
-      throw Exception();
-    }
-  }
-}
+// class SearchApi {
+//   static Future<List<GetTicket>> getTickets(String query) async {
+//     final url = Uri.parse("http://3.111.229.113:3000/ticket/ze_alam");
+//     final response = await http.get(url);
+//     if (response.statusCode == 200) {
+//       final List tickets = json.decode(response.body);
+//       return tickets.map((e) => GetTicket.fromJson(e)).where((ticket) {
+//         final userId = ticket.userId;
+//         final searchquery = query;
+//         return userId.contains(searchquery);
+//       }).toList();
+//     } else {
+//       throw Exception();
+//     }
+//   }
+// }
+
+
+
+
+// class searchApi {
+// //function to fetch the ticket data for a perticular user
+//   static Future<Null> fetchTicketData() async {
+//     var authToken = await _secureStorage.read(key: "token");
+
+//     final response = await http.get(
+//       Uri.parse('${baseUrl}allTickets/J01KB427'),
+//       headers: {
+//         HttpHeaders.authorizationHeader: authToken!,
+//         HttpHeaders.contentTypeHeader: 'application/json'
+//       },
+//     );
+//     if (response.statusCode == 200) {
+//       var jsonResponse = json.decode(response.body);
+
+//       return jsonResponse;
+//     } else {
+//       throw Exception('Unexpected error occured!');
+//     }
+//   }
+// }
