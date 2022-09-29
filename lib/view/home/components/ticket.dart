@@ -90,7 +90,7 @@ class _TicketState extends State<Ticket> {
                               createdDate,
                               //  '12/10/21',
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 9,
                                 fontWeight: FontWeight.bold,
                                 color: primaryColor,
                               ),
@@ -173,7 +173,7 @@ class _TicketState extends State<Ticket> {
                                               createdDate,
                                               //'12/10/21',
                                               style: TextStyle(
-                                                fontSize: 10,
+                                                fontSize: 9,
                                                 fontWeight: FontWeight.bold,
                                                 color: primaryColor,
                                               ),
@@ -223,6 +223,54 @@ class _TicketState extends State<Ticket> {
                                             //     // });
                                             //   },
                                             // ),
+
+                                            InkWell(
+                                              onTap: () {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (ctx) =>
+                                                        AlertDialog(
+                                                          content: SizedBox(
+                                                            height: 100,
+                                                            width: 100,
+                                                            child: Center(
+                                                              child: Text(
+                                                                'You changed the ticket status to in-process',
+                                                                style:
+                                                                    TextStyle(
+                                                                  color:
+                                                                      primaryColor,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ));
+                                              },
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                  vertical: 5,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: primaryColor),
+                                                    color: whiteColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5)),
+                                                child: Text(
+                                                  'Change Status',
+                                                  style: TextStyle(
+                                                    color: primaryColor,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                             Container(
                                               padding:
                                                   const EdgeInsets.symmetric(

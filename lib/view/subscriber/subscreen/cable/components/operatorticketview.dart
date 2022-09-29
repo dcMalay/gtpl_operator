@@ -109,9 +109,7 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
-                              data[index].isclosed == 0
-                                  ? data[index].status
-                                  : "closed",
+                              data[index].isclosed == 0 ? 'Received' : "closed",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -176,7 +174,7 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                             Text(
                                               createdDate,
                                               style: TextStyle(
-                                                fontSize: 10,
+                                                fontSize: 9.3,
                                                 fontWeight: FontWeight.bold,
                                                 color: primaryColor,
                                               ),
@@ -207,24 +205,70 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            DropdownButton(
-                                              // Initial Value
-                                              value: dropdownvalue,
+                                            // DropdownButton(
+                                            //   // Initial Value
+                                            //   value: dropdownvalue,
 
-                                              // Down Arrow Icon
-                                              icon: const Icon(
-                                                  Icons.keyboard_arrow_down),
-                                              items: _items.map((String items) {
-                                                return DropdownMenuItem<String>(
-                                                  value: items,
-                                                  child: Text(items),
-                                                );
-                                              }).toList(),
-                                              onChanged: (String? newValue) {
-                                                // setState(() {
-                                                //   dropdownvalue = newValue!;
-                                                // });
-                                              },
+                                            //   // Down Arrow Icon
+                                            //   icon: const Icon(
+                                            //       Icons.keyboard_arrow_down),
+                                            //   items: _items.map((String items) {
+                                            //     return DropdownMenuItem<String>(
+                                            //       value: items,
+                                            //       child: Text(items),
+                                            //     );
+                                            //   }).toList(),
+                                            //   onChanged: (String? newValue) {
+                                            //     // setState(() {
+                                            //     //   dropdownvalue = newValue!;
+                                            //     // });
+                                            //   },
+                                            // ),
+
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 5,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                  color: whiteColor,
+                                                  border: Border.all(
+                                                      color: primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (ctx) =>
+                                                          AlertDialog(
+                                                            content: SizedBox(
+                                                              height: 100,
+                                                              width: 100,
+                                                              child: Center(
+                                                                child: Text(
+                                                                  'You changed the ticket status to in-process',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color:
+                                                                        primaryColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ));
+                                                },
+                                                child: Text(
+                                                  'Change status',
+                                                  style: TextStyle(
+                                                      color: primaryColor,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
                                             ),
                                             Container(
                                               padding:
