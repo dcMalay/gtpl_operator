@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gtpl_operator/api_layer/networking.dart';
@@ -145,13 +143,6 @@ class _CableTvState extends State<CableTv> {
             ],
           ),
         ),
-        // Column(
-        //   children: const [
-        //     Expanded(
-        //       child: OperatorTicketView(),
-        //     )
-        //   ],
-        // ),
         Container(
           padding: const EdgeInsets.only(top: 10),
           height: 480,

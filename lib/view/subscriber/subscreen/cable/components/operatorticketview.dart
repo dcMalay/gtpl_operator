@@ -3,6 +3,7 @@ import 'package:gtpl_operator/api_layer/model/get_ticket_model.dart';
 import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
 
+// ignore: must_be_immutable
 class OperatorTicketView extends StatefulWidget {
   const OperatorTicketView({
     Key? key,
@@ -19,11 +20,31 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
 
   late Future<List<GetTicket>> futureData;
 
+  late Future<List<GetTicket>> searchData;
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     futureData = fetchTicketData();
+    // futureData = searchApi.fetchTicketData();
     super.initState();
   }
+
+  // void _runFilter(String enteredKeyword) async {
+  //   if (enteredKeyword.isEmpty) {
+  //     // if the search field is empty or only contains white-space, we'll display all users
+  //     searchData = fetchTicketData();
+  //   } else {
+  //    // searchData = await searchApi.fetchTicketData().then((value) =>
+  //       //  value?.where((data) => data.userId.contains(enteredKeyword)));
+  //     // we use the toLowerCase() method to make it case-insensitive
+  //   }
+
+  //   // Refresh the UI
+  //   setState(() {
+  //     futureData = searchData;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
