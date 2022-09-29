@@ -36,8 +36,8 @@ Future<List<GetTicket>> fetchTicketData() async {
   );
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
-    final allTicketList =
-        jsonResponse.map((data) => GetTicket.fromJson(data)).toList();
+    var resp = jsonResponse.reversed;
+    final allTicketList = resp.map((data) => GetTicket.fromJson(data)).toList();
     return allTicketList;
   } else {
     throw Exception('Unexpected error occured!');
@@ -62,6 +62,44 @@ Future<List<GetTicket>> fetchUserTicket(String user) async {
     throw Exception('Unexpected error occured!');
   }
 }
+
+//function to update the ticket status
+Future<http.Response> postTicket(String ticketId, String status) async {
+  // var authUser = await _secureStorage.read(key: "user");
+  var authToken = await _secureStorage.read(key: "token");
+  var operatorCode = await _secureStorage.read(key: "operator");
+  // print("Token from postTicket---->${authToken}");
+  // print("operator from postTicket---->${operatorCode}");
+  // print("user from postTicket---->${authUser}");
+
+  return http.post(
+    Uri.parse("${baseUrl}update_status/$ticketId"),
+    headers: {
+      HttpHeaders.authorizationHeader: authToken!,
+      HttpHeaders.contentTypeHeader: "application/json"
+    },
+    body: jsonEncode(
+      <String, dynamic>{
+        "oparetor_id": operatorCode,
+        "status": "in-progress",
+      },
+    ),
+  );
+
+  // if (response.statusCode == 201) {
+  //   var result = await UserTicket.fromJson(json.decode(response.body));
+  //   print('result from postticket------>${result}');
+
+  //   return result;
+  // } else {
+  //   throw Exception('post ticket action loading failed!---------->');
+  // }
+}
+
+
+
+
+
 
 // class SearchApi {
 //   static Future<List<GetTicket>> getTickets(String query) async {

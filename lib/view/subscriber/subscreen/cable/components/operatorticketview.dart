@@ -103,13 +103,15 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                             padding: const EdgeInsets.only(
                                 top: 5, left: 10, right: 10),
                             decoration: BoxDecoration(
-                              color: data[index].status == 'active'
+                              color: data[index].isclosed == 0
                                   ? greenColor
                                   : redColor,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
-                              data[index].status,
+                              data[index].isclosed == 0
+                                  ? data[index].status
+                                  : "closed",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
