@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gtpl_operator/api_layer/model/get_ticket_model.dart';
+import 'package:gtpl_operator/api_layer/model/raring_model.dart';
 import 'package:gtpl_operator/api_layer/model/token_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -96,49 +97,14 @@ Future<http.Response> postTicket(String ticketId, String status) async {
   // }
 }
 
-
-
-
-
-
-// class SearchApi {
-//   static Future<List<GetTicket>> getTickets(String query) async {
-//     final url = Uri.parse("http://3.111.229.113:3000/ticket/ze_alam");
-//     final response = await http.get(url);
-//     if (response.statusCode == 200) {
-//       final List tickets = json.decode(response.body);
-//       return tickets.map((e) => GetTicket.fromJson(e)).where((ticket) {
-//         final userId = ticket.userId;
-//         final searchquery = query;
-//         return userId.contains(searchquery);
-//       }).toList();
-//     } else {
-//       throw Exception();
-//     }
-//   }
-// }
-
-
-
-
-// class searchApi {
-// //function to fetch the ticket data for a perticular user
-//   static Future<Null> fetchTicketData() async {
-//     var authToken = await _secureStorage.read(key: "token");
-
-//     final response = await http.get(
-//       Uri.parse('${baseUrl}allTickets/J01KB427'),
-//       headers: {
-//         HttpHeaders.authorizationHeader: authToken!,
-//         HttpHeaders.contentTypeHeader: 'application/json'
-//       },
-//     );
-//     if (response.statusCode == 200) {
-//       var jsonResponse = json.decode(response.body);
-
-//       return jsonResponse;
-//     } else {
-//       throw Exception('Unexpected error occured!');
-//     }
-//   }
-// }
+//function to get rating star
+Future<Rating> getRating(String ticketId) async {
+  final response =
+      await http.get(Uri.parse("${baseUrl}get/star/J01KB427/$ticketId"));
+  if (response.statusCode == 200) {
+    var jsonResponse = json.decode(response.body);
+    return Rating.fromJson(jsonResponse);
+  } else {
+    throw Exception('Unexpected error occured!');
+  }
+}
