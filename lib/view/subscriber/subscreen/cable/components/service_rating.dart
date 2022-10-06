@@ -12,9 +12,7 @@ class StarRating extends StatefulWidget {
 
 class _StarRatingState extends State<StarRating> {
   double _rating = 0.0;
-  List allRatings = [];
-  List filterRating = [];
-  late Future<Rating> ratingData;
+  late Future<List<Rating>> ratingData;
   @override
   void initState() {
     ratingData = getRating(widget.ticketId);
@@ -24,28 +22,41 @@ class _StarRatingState extends State<StarRating> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: Center(
-        child: RatingBar.builder(
-          initialRating: _rating,
-          minRating: 1,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          itemCount: 5,
-          itemSize: 20,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-          itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: Colors.amber,
-          ),
-          onRatingUpdate: (rating) {
-            setState(() {
-              _rating = rating;
-            });
-          },
-        ),
-      ),
+    return Column(
+      children: [
+        FutureBuilder<List<Rating>>(
+            future: ratingData,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return SizedBox(
+                  height: 50,
+                  child: Center(
+                    child: RatingBar.builder(
+                      initialRating: snapshot.data![0].star.toDouble(),
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemSize: 20,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        setState(() {
+                          _rating = rating;
+                        });
+                      },
+                    ),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return const Center(child: CircularProgressIndicator());
+            }),
+      ],
     );
   }
 }

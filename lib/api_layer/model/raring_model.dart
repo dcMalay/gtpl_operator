@@ -1,3 +1,15 @@
+// To parse this JSON data, do
+//
+//     final rating = ratingFromJson(jsonString);
+
+import 'dart:convert';
+
+List<Rating> ratingFromJson(String str) =>
+    List<Rating>.from(json.decode(str).map((x) => Rating.fromJson(x)));
+
+String ratingToJson(List<Rating> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Rating {
   Rating({
     required this.id,

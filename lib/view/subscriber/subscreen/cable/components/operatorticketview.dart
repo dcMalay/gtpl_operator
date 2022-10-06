@@ -110,7 +110,9 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
-                              data[index].isclosed == 0 ? 'Received' : "closed",
+                              data[index].isclosed == 0
+                                  ? data[index].status
+                                  : "closed",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -242,7 +244,9 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
                                               child: InkWell(
-                                                onTap: () {
+                                                onTap: () async {
+                                                  await updateTicket(
+                                                      data[index].id);
                                                   showDialog(
                                                       context: context,
                                                       builder: (ctx) =>

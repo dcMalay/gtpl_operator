@@ -65,14 +65,10 @@ Future<List<GetTicket>> fetchUserTicket(String user) async {
 }
 
 //function to update the ticket status
-Future<http.Response> postTicket(String ticketId, String status) async {
-  // var authUser = await _secureStorage.read(key: "user");
+Future<http.Response> updateTicket(String ticketId) async {
   var authToken = await _secureStorage.read(key: "token");
-  var operatorCode = await _secureStorage.read(key: "operator");
-  // print("Token from postTicket---->${authToken}");
-  // print("operator from postTicket---->${operatorCode}");
-  // print("user from postTicket---->${authUser}");
-
+  //var operatorCode = await _secureStorage.read(key: "operator");
+  print("update ticket $authToken");
   return http.post(
     Uri.parse("${baseUrl}update_status/$ticketId"),
     headers: {
@@ -80,30 +76,19 @@ Future<http.Response> postTicket(String ticketId, String status) async {
       HttpHeaders.contentTypeHeader: "application/json"
     },
     body: jsonEncode(
-      <String, dynamic>{
-        "oparetor_id": operatorCode,
-        "status": "in-progress",
-      },
+      <String, String>{"oparetor_id": "J01KB427", "status": "in-progress"},
     ),
   );
-
-  // if (response.statusCode == 201) {
-  //   var result = await UserTicket.fromJson(json.decode(response.body));
-  //   print('result from postticket------>${result}');
-
-  //   return result;
-  // } else {
-  //   throw Exception('post ticket action loading failed!---------->');
-  // }
 }
 
 //function to get rating star
-Future<Rating> getRating(String ticketId) async {
+Future<List<Rating>> getRating(String ticketId) async {
+  print("ticket Id from get rating------>${ticketId}");
   final response =
       await http.get(Uri.parse("${baseUrl}get/star/J01KB427/$ticketId"));
   if (response.statusCode == 200) {
-    var jsonResponse = json.decode(response.body);
-    return Rating.fromJson(jsonResponse);
+    List jsonResponse = json.decode(response.body);
+    return jsonResponse.map((data) => Rating.fromJson(data)).toList();
   } else {
     throw Exception('Unexpected error occured!');
   }
