@@ -38,8 +38,10 @@ class ManageTicket extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 1650,
-            child: Ticket(),
+            height: 730,
+            child: Ticket(
+              physics: BouncingScrollPhysics(),
+            ),
           ),
         ],
       ),

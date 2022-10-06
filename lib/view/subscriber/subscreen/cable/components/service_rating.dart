@@ -11,7 +11,6 @@ class StarRating extends StatefulWidget {
 }
 
 class _StarRatingState extends State<StarRating> {
-  double _rating = 0.0;
   late Future<List<Rating>> ratingData;
   @override
   void initState() {
@@ -33,21 +32,18 @@ class _StarRatingState extends State<StarRating> {
                   child: Center(
                     child: RatingBar.builder(
                       initialRating: snapshot.data![0].star.toDouble(),
-                      minRating: 1,
+                      minRating: 0,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
                       itemCount: 5,
                       itemSize: 20,
+                      ignoreGestures: true,
                       itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                       itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
-                      onRatingUpdate: (rating) {
-                        setState(() {
-                          _rating = rating;
-                        });
-                      },
+                      onRatingUpdate: (rating) {},
                     ),
                   ),
                 );

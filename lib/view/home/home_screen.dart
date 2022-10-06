@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding: const EdgeInsets.all(5),
                   height: 400,
                   width: 450,
-                  child: const Ticket(),
+                  child: const Ticket(physics: NeverScrollableScrollPhysics()),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

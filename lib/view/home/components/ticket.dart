@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gtpl_operator/api_layer/model/get_ticket_model.dart';
 import 'package:gtpl_operator/api_layer/networking.dart';
 import 'package:gtpl_operator/const/const.dart';
+import 'package:gtpl_operator/view/subscriber/subscreen/cable/components/service_rating.dart';
 
 class Ticket extends StatefulWidget {
   const Ticket({
     Key? key,
+    required this.physics,
   }) : super(key: key);
-
+  final ScrollPhysics physics;
   @override
   State<Ticket> createState() => _TicketState();
 }
@@ -40,7 +42,7 @@ class _TicketState extends State<Ticket> {
           if (snapshot.hasData) {
             List<GetTicket>? data = snapshot.data;
             return ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
+                physics: widget.physics,
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   var str = data[index].createdAt.toString();
@@ -199,6 +201,9 @@ class _TicketState extends State<Ticket> {
                                               ],
                                             ),
                                           ),
+                                        ),
+                                        StarRating(
+                                          ticketId: data[index].id,
                                         ),
                                         Row(
                                           mainAxisAlignment:
