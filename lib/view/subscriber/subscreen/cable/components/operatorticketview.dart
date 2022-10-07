@@ -204,9 +204,11 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                             ),
                                           ),
                                         ),
-                                        StarRating(
-                                          ticketId: data[index].id,
-                                        ),
+                                        data[index].isclosed == 1
+                                            ? StarRating(
+                                                ticketId: data[index].id,
+                                              )
+                                            : Container(),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,

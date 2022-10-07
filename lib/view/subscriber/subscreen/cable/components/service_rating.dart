@@ -12,6 +12,7 @@ class StarRating extends StatefulWidget {
 
 class _StarRatingState extends State<StarRating> {
   late Future<List<Rating>> ratingData;
+  double _rating = 0.0;
   @override
   void initState() {
     ratingData = getRating(widget.ticketId);

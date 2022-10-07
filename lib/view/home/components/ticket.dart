@@ -202,9 +202,11 @@ class _TicketState extends State<Ticket> {
                                             ),
                                           ),
                                         ),
-                                        StarRating(
-                                          ticketId: data[index].id,
-                                        ),
+                                        data[index].isclosed == 1
+                                            ? StarRating(
+                                                ticketId: data[index].id,
+                                              )
+                                            : Container(),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
