@@ -93,3 +93,41 @@ Future<List<Rating>> getRating(String ticketId) async {
     throw Exception('Unexpected error occured!');
   }
 }
+
+//function to update the ticket status
+Future<http.Response> requestAdmin(String ticketId) async {
+  var authToken = await _secureStorage.read(key: "token");
+  //var operatorCode = await _secureStorage.read(key: "operator");
+  print("update ticket $authToken");
+  return http.post(
+    Uri.parse("${baseUrl}update_status/$ticketId"),
+    headers: {
+      HttpHeaders.authorizationHeader: authToken!,
+      HttpHeaders.contentTypeHeader: "application/json"
+    },
+    body: jsonEncode(
+      <String, String>{"oparetor_id": "J01KB427", "status": "Admin"},
+    ),
+  );
+}
+
+
+
+// //function to update the ticket status
+// Future<http.Response> requestAdmin(String ticketId) async {
+//   var authToken = await _secureStorage.read(key: "token");
+//   //var operatorCode = await _secureStorage.read(key: "operator");
+//   print("update ticket $authToken");
+//   return http.post(
+//     Uri.parse("${baseUrl}sendmessage/J01KB427"),
+//     headers: {
+//       HttpHeaders.authorizationHeader: authToken!,
+//       HttpHeaders.contentTypeHeader: "application/json"
+//     },
+//     body: jsonEncode(
+//       <String, String>{
+//         "message": "You get a message from operator Id : J01KB427 ",
+//       },
+//     ),
+//   );
+// }

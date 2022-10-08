@@ -250,27 +250,27 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                                   await updateTicket(
                                                       data[index].id);
                                                   showDialog(
-                                                      context: context,
-                                                      builder: (ctx) =>
-                                                          AlertDialog(
-                                                            content: SizedBox(
-                                                              height: 100,
-                                                              width: 100,
-                                                              child: Center(
-                                                                child: Text(
-                                                                  'You changed the ticket status to in-process',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    color:
-                                                                        primaryColor,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
-                                                                  ),
-                                                                ),
-                                                              ),
+                                                    context: context,
+                                                    builder: (ctx) =>
+                                                        AlertDialog(
+                                                      content: SizedBox(
+                                                        height: 100,
+                                                        width: 100,
+                                                        child: Center(
+                                                          child: Text(
+                                                            'You changed the ticket status to in-process',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  primaryColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
                                                             ),
-                                                          ));
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                                 child: Text(
                                                   'Change status',
@@ -291,8 +291,33 @@ class _OperatorTicketViewState extends State<OperatorTicketView> {
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
                                               child: InkWell(
-                                                onTap: () {
-                                                  Navigator.pop(context);
+                                                onTap: () async {
+                                                  await requestAdmin(
+                                                    data[index].id,
+                                                  );
+
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (ctx) =>
+                                                        AlertDialog(
+                                                      content: SizedBox(
+                                                        height: 100,
+                                                        width: 100,
+                                                        child: Center(
+                                                          child: Text(
+                                                            'You send a message to admin',
+                                                            style: TextStyle(
+                                                              color:
+                                                                  primaryColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
                                                 },
                                                 child: Text(
                                                   'Request Admin',
